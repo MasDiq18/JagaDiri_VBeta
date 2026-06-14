@@ -1,0 +1,190 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: "#1A6B5A",
+          light: "#E8F5F1",
+          dark: "#145649",
+          50: "#E8F5F1",
+          100: "#D1EBE3",
+          200: "#A3D7C7",
+          300: "#75C3AB",
+          400: "#47AF8F",
+          500: "#1A6B5A",
+          600: "#155648",
+          700: "#104136",
+          800: "#0B2C24",
+          900: "#061712",
+          950: "#030b06",
+        },
+        secondary: {
+          DEFAULT: "#2B5EA7",
+          light: "#E3EDF9",
+          dark: "#224B86",
+          50: "#E3EDF9",
+          100: "#C7DBF3",
+          200: "#8FB7E7",
+          300: "#5793DB",
+          400: "#2B5EA7",
+          500: "#224B86",
+          600: "#1A3865",
+          700: "#112544",
+          800: "#091323",
+          900: "#040911",
+        },
+        danger: {
+          DEFAULT: "#D32F2F",
+          light: "#FDEAEA",
+          dark: "#B71C1C",
+        },
+        warning: {
+          DEFAULT: "#F59E0B",
+          light: "#FEF3C7",
+          dark: "#D97706",
+        },
+        success: {
+          DEFAULT: "#059669",
+          light: "#D1FAE5",
+          dark: "#047857",
+        },
+        text: {
+          primary: "#1A1A2E",
+          secondary: "#6B7280",
+        },
+        background: "#F8FFFE",
+        surface: "#FFFFFF",
+      },
+      fontFamily: {
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        heading: ["var(--font-plus-jakarta)", "system-ui", "sans-serif"],
+      },
+      fontSize: {
+        "body-sm": ["0.875rem", { lineHeight: "1.5" }],
+        body: ["1rem", { lineHeight: "1.75" }],
+        "body-lg": ["1.125rem", { lineHeight: "1.75" }],
+        "heading-sm": ["1.25rem", { lineHeight: "1.4" }],
+        "heading-md": ["1.5rem", { lineHeight: "1.3" }],
+        "heading-lg": ["2rem", { lineHeight: "1.2" }],
+        "heading-xl": ["2.5rem", { lineHeight: "1.1" }],
+        "heading-2xl": ["3rem", { lineHeight: "1.1" }],
+        "heading-3xl": ["3.75rem", { lineHeight: "1.05" }],
+      },
+      borderRadius: {
+        xl: "1rem",
+        "2xl": "1.5rem",
+        "3xl": "2rem",
+      },
+      boxShadow: {
+        glass: "0 8px 32px rgba(26, 107, 90, 0.08)",
+        "glass-lg": "0 16px 48px rgba(26, 107, 90, 0.12)",
+        "glass-xl": "0 24px 64px rgba(26, 107, 90, 0.16)",
+        card: "0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 24px rgba(0, 0, 0, 0.06)",
+        "card-hover": "0 8px 32px rgba(0, 0, 0, 0.08), 0 16px 48px rgba(0, 0, 0, 0.06)",
+        sos: "0 0 0 0 rgba(211, 47, 47, 0.7)",
+        glow: "0 0 20px rgba(26, 107, 90, 0.3)",
+        "glow-secondary": "0 0 20px rgba(43, 94, 167, 0.3)",
+      },
+      animation: {
+        "fade-in": "fadeIn 0.6s ease-out forwards",
+        "fade-in-up": "fadeInUp 0.6s ease-out forwards",
+        "fade-in-down": "fadeInDown 0.6s ease-out forwards",
+        "slide-up": "slideUp 0.5s ease-out forwards",
+        "slide-down": "slideDown 0.5s ease-out forwards",
+        "slide-left": "slideLeft 0.5s ease-out forwards",
+        "slide-right": "slideRight 0.5s ease-out forwards",
+        pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        float: "float 6s ease-in-out infinite",
+        "float-delayed": "float 6s ease-in-out 2s infinite",
+        "float-slow": "float 8s ease-in-out infinite",
+        "sos-pulse": "sosPulse 1.5s ease-in-out infinite",
+        heartbeat: "heartbeat 1.5s ease-in-out infinite",
+        "gradient-x": "gradientX 15s ease infinite",
+        shimmer: "shimmer 2s linear infinite",
+        "spin-slow": "spin 3s linear infinite",
+        "bounce-gentle": "bounceGentle 2s ease-in-out infinite",
+        "counter-up": "counterUp 2s ease-out forwards",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        fadeInUp: {
+          "0%": { opacity: "0", transform: "translateY(30px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        fadeInDown: {
+          "0%": { opacity: "0", transform: "translateY(-30px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        slideUp: {
+          "0%": { transform: "translateY(100%)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        slideDown: {
+          "0%": { transform: "translateY(-100%)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        slideLeft: {
+          "0%": { transform: "translateX(100%)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+        slideRight: {
+          "0%": { transform: "translateX(-100%)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        sosPulse: {
+          "0%": { boxShadow: "0 0 0 0 rgba(211, 47, 47, 0.7)" },
+          "70%": { boxShadow: "0 0 0 15px rgba(211, 47, 47, 0)" },
+          "100%": { boxShadow: "0 0 0 0 rgba(211, 47, 47, 0)" },
+        },
+        heartbeat: {
+          "0%, 100%": { transform: "scale(1)" },
+          "14%": { transform: "scale(1.15)" },
+          "28%": { transform: "scale(1)" },
+          "42%": { transform: "scale(1.15)" },
+          "70%": { transform: "scale(1)" },
+        },
+        gradientX: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+        bounceGentle: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        counterUp: {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+      },
+      backgroundImage: {
+        "gradient-primary": "linear-gradient(135deg, #1A6B5A 0%, #2B5EA7 100%)",
+        "gradient-primary-light": "linear-gradient(135deg, #E8F5F1 0%, #E3EDF9 100%)",
+        "gradient-hero": "linear-gradient(135deg, #0B2C24 0%, #1A6B5A 30%, #2B5EA7 70%, #112544 100%)",
+        "gradient-glass": "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)",
+        "gradient-radial": "radial-gradient(ellipse at center, var(--tw-gradient-stops))",
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;

@@ -1,0 +1,97 @@
+"""
+JagaDiri — Database Setup
+SQLAlchemy 2.0 async engine dan session factory.
+"""
+
+import uuid
+from datetime import datetime, timezone
+from typing import AsyncGenerator
+
+from sqlalchemy import MetaData, func
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.ext.asyncio import (
+    AsyncSession,
+    async_sessionmaker,
+    create_async_engine,
+)
+from sqlalchemy.orm import (
+    DeclarativeBase,
+    Mapped,
+    mapped_column,
+)
+
+from app.core.config import settings
+
+# Naming convention untuk constraint (agar migration konsisten)
+convention = {
+    "ix": "ix_%(column_0_label)s",
+    "uq": "uq_%(table_name)s_%(column_0_name)s",
+    "ck": "ck_%(table_name)s_%(constraint_name)s",
+    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+    "pk": "pk_%(table_name)s",
+}
+
+metadata = MetaData(naming_convention=convention)
+
+# Async engine
+engine = create_async_engine(
+    settings.DATABASE_URL,
+    echo=settings.DEBUG,
+    pool_size=20,
+    max_overflow=10,
+    pool_pre_ping=True,
+)
+
+# Session factory
+async_session_factory = async_sessionmaker(
+    engine,
+    class_=AsyncSession,
+    expire_on_commit=False,
+)
+
+
+class Base(DeclarativeBase):
+    """Base class untuk semua model SQLAlchemy."""
+
+    metadata = metadata
+
+    # Kolom bersama untuk semua tabel
+    id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True),
+        primary_key=True,
+        default=uuid.uuid4,
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        default=lambda: datetime.now(timezone.utc),
+        server_default=func.now(),
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        default=lambda: datetime.now(timezone.utc),
+        onupdate=lambda: datetime.now(timezone.utc),
+        server_default=func.now(),
+    )
+
+
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    """Dependency injection untuk database session."""
+    async with async_session_factory() as session:
+        try:
+            yield session
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise
+        finally:
+            await session.close()
+
+
+async def create_tables():
+    """Buat semua tabel (untuk development). Gunakan Alembic di produksi."""
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+
+async def drop_tables():
+    """Hapus semua tabel (untuk testing)."""
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)

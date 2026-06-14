@@ -1,0 +1,396 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================
+   JagaDiri Design System — CSS Custom Properties
+   ===================================================== */
+
+:root {
+  /* Primary Colors */
+  --color-primary: #1A6B5A;
+  --color-primary-light: #E8F5F1;
+  --color-primary-dark: #145649;
+
+  /* Secondary Colors */
+  --color-secondary: #2B5EA7;
+  --color-secondary-light: #E3EDF9;
+  --color-secondary-dark: #224B86;
+
+  /* Semantic Colors */
+  --color-danger: #D32F2F;
+  --color-danger-light: #FDEAEA;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FEF3C7;
+  --color-success: #059669;
+  --color-success-light: #D1FAE5;
+
+  /* Text Colors */
+  --color-text-primary: #1A1A2E;
+  --color-text-secondary: #6B7280;
+
+  /* Background */
+  --color-background: #F8FFFE;
+  --color-surface: #FFFFFF;
+
+  /* Spacing */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+
+  /* Shadows */
+  --shadow-glass: 0 8px 32px rgba(26, 107, 90, 0.08);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Dark Mode */
+.dark {
+  --color-background: #0F1419;
+  --color-surface: #1A1F2E;
+  --color-text-primary: #F0F0F5;
+  --color-text-secondary: #9CA3AF;
+  --color-primary-light: #0B2C24;
+  --color-secondary-light: #112544;
+}
+
+/* =====================================================
+   Base Styles
+   ===================================================== */
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+
+  html {
+    @apply scroll-smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-text-primary font-sans text-body;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold tracking-tight;
+  }
+
+  h1 { @apply text-heading-3xl; }
+  h2 { @apply text-heading-2xl; }
+  h3 { @apply text-heading-xl; }
+  h4 { @apply text-heading-lg; }
+  h5 { @apply text-heading-md; }
+  h6 { @apply text-heading-sm; }
+
+  ::selection {
+    background-color: rgba(26, 107, 90, 0.2);
+    color: var(--color-primary);
+  }
+}
+
+/* =====================================================
+   Component Utilities
+   ===================================================== */
+
+@layer components {
+  /* Glassmorphism Cards */
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-glass;
+  }
+
+  .glass-dark {
+    @apply bg-gray-900/70 backdrop-blur-xl border border-white/10 shadow-glass;
+  }
+
+  .glass-primary {
+    @apply bg-primary/10 backdrop-blur-xl border border-primary/20;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-lg rounded-2xl border border-white/30 shadow-card
+           transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1;
+  }
+
+  .glass-card-static {
+    @apply bg-white/80 backdrop-blur-lg rounded-2xl border border-white/30 shadow-card;
+  }
+
+  /* Gradient Backgrounds */
+  .gradient-primary {
+    @apply bg-gradient-to-br from-primary to-secondary;
+  }
+
+  .gradient-hero {
+    background: linear-gradient(135deg, #0B2C24 0%, #1A6B5A 30%, #2B5EA7 70%, #112544 100%);
+    background-size: 200% 200%;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white
+           font-semibold rounded-xl transition-all duration-300
+           hover:bg-primary-dark hover:shadow-glow
+           active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed
+           min-h-[44px] min-w-[44px];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-secondary text-white
+           font-semibold rounded-xl transition-all duration-300
+           hover:bg-secondary-dark hover:shadow-glow-secondary
+           active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed
+           min-h-[44px] min-w-[44px];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           border-2 border-primary text-primary font-semibold rounded-xl
+           transition-all duration-300 hover:bg-primary hover:text-white
+           active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed
+           min-h-[44px] min-w-[44px];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           text-primary font-semibold rounded-xl transition-all duration-300
+           hover:bg-primary-light active:scale-[0.97]
+           disabled:opacity-50 disabled:cursor-not-allowed
+           min-h-[44px] min-w-[44px];
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           bg-danger text-white font-bold rounded-xl transition-all duration-300
+           hover:bg-danger-dark active:scale-[0.97]
+           disabled:opacity-50 disabled:cursor-not-allowed
+           min-h-[44px] min-w-[44px];
+  }
+
+  /* SOS Button */
+  .sos-button {
+    @apply fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full
+           bg-danger text-white font-bold text-lg
+           flex items-center justify-center
+           shadow-lg cursor-pointer
+           transition-transform duration-200 hover:scale-110
+           active:scale-95;
+    animation: sosPulse 1.5s ease-in-out infinite;
+  }
+
+  /* Input Styles */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200
+           bg-white text-text-primary placeholder:text-text-secondary/50
+           transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary
+           min-h-[44px];
+  }
+
+  /* Section Styling */
+  .section-padding {
+    @apply px-4 py-16 sm:px-6 md:px-8 lg:py-24;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* =====================================================
+   Senior Mode — Accessibility Scaling
+   ===================================================== */
+
+[data-senior-mode="true"] {
+  font-size: 1.25rem;
+}
+
+[data-senior-mode="true"] h1 { font-size: 3rem; }
+[data-senior-mode="true"] h2 { font-size: 2.5rem; }
+[data-senior-mode="true"] h3 { font-size: 2rem; }
+[data-senior-mode="true"] h4 { font-size: 1.75rem; }
+
+[data-senior-mode="true"] .btn-primary,
+[data-senior-mode="true"] .btn-secondary,
+[data-senior-mode="true"] .btn-outline,
+[data-senior-mode="true"] .btn-ghost,
+[data-senior-mode="true"] .btn-danger {
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  min-height: 56px;
+}
+
+[data-senior-mode="true"] .input-field {
+  padding: 1rem 1.25rem;
+  font-size: 1.25rem;
+  min-height: 56px;
+}
+
+[data-senior-mode="true"] .sos-button {
+  width: 5rem;
+  height: 5rem;
+  font-size: 1.5rem;
+}
+
+/* =====================================================
+   Custom Scrollbar
+   ===================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(26, 107, 90, 0.2);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(26, 107, 90, 0.4);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(26, 107, 90, 0.2) transparent;
+}
+
+/* =====================================================
+   Utility Animations
+   ===================================================== */
+
+@layer utilities {
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+  .animation-delay-800 {
+    animation-delay: 800ms;
+  }
+  .animation-delay-1000 {
+    animation-delay: 1000ms;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-grid {
+    background-image: 
+      linear-gradient(rgba(26, 107, 90, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26, 107, 90, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .bg-dots {
+    background-image: radial-gradient(rgba(26, 107, 90, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .mask-gradient {
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+}
+
+/* =====================================================
+   Heartbeat Line Animation (Hero)
+   ===================================================== */
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.heartbeat-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 3s ease-in-out forwards;
+}
+
+/* =====================================================
+   Number Counter Animation
+   ===================================================== */
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.count-up {
+  animation: countUp 0.8s ease-out forwards;
+}
+
+/* =====================================================
+   Shimmer Loading Effect
+   ===================================================== */
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(26, 107, 90, 0.05) 25%,
+    rgba(26, 107, 90, 0.1) 50%,
+    rgba(26, 107, 90, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* =====================================================
+   SOS Button Pulse Animation
+   ===================================================== */
+
+@keyframes sosPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.6);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 16px rgba(211, 47, 47, 0);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(211, 47, 47, 0);
+    transform: scale(1);
+  }
+}
+
+/* =====================================================
+   Shimmer Keyframe
+   ===================================================== */
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* =====================================================
+   Fade-In Animation (used by animate-fade-in class)
+   ===================================================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
